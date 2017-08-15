@@ -6,8 +6,13 @@
       <p><img :src="dish.image" alt="pic cannot display" :style="stylesImg"></p>
       <h4>Description :</h4>
       <p>{{ dish.description }}</p>
+
+      <form class="" action="index.html" method="post">
+        <input type="text" name="" value="" v-model="message">
+      </form>
+      <p> {{ message }} </p>
+
       <button type="button" name="button">Edit {{ dish.name }} description</button>
-    </p>
 
   </div>
 </template>
@@ -18,7 +23,8 @@ export default {
   data() {
     return {
       dish: null,
-      stylesImg: { height: "300px" }
+      stylesImg: { height: "300px" },
+      message: ""
     };
   },
   created() {

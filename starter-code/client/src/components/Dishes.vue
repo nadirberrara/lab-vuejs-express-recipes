@@ -3,8 +3,8 @@
   <div class="dishesList">
     <h1>{{ message }}</h1>
 
-      <ul v-for="dish in dishes">
-          <router-link :to="'/'+ dish._id">{{ dish.name }}</router-link>
+      <ul v-for="dish in dishes" :style="styles2">
+          <h2><router-link :to="'/'+ dish._id">{{ dish.name }}</router-link></h2>
           <!-- <h4>Description :</h4> -->
           <!-- <p>{{ dish.description }}</p> -->
           <p><img :src="dish.image" alt="pic cannot display" :style="styles"></p>
@@ -23,7 +23,8 @@ export default {
     return {
       message: "DISHES",
       dishes: null,
-      styles: { height: "150px" }
+      styles: { height: "200px" },
+      styles2: { margin: "20px", border: "1px solid grey" }
     };
   },
   created() {
