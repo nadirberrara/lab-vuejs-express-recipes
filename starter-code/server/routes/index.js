@@ -32,4 +32,19 @@ router.get("/api/dishes/:id", (req, res, next) => {
   });
 });
 
+router.put("/api/dishes/:id", (req, res, next) => {
+  Dish.findById(req.params.id, function(err, dish) {
+    if (err) {
+      res.json("dish not find");
+    }
+    dish.description = req.body.description;
+    dish.save(function(err) {
+      if (err) {
+        res.send(err);
+      }
+      res.json({ message: "Well done, description updated !" });
+    });
+  });
+});
+
 module.exports = router;
