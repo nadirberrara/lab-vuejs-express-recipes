@@ -35,15 +35,17 @@ router.get("/api/dishes/:id", (req, res, next) => {
 router.put("/api/dishes/:id", (req, res, next) => {
   Dish.findById(req.params.id, function(err, dish) {
     if (err) {
-      res.json("dish not find");
+      next(err);
+    } else {
+      dish.description = req.body.description;
+      dish.save(function(err) {
+        if (err) {
+          res.send(err);
+        } else {
+          res.json({ message: "Well done, description updated !" });
+        }
+      });
     }
-    dish.description = req.body.description;
-    dish.save(function(err) {
-      if (err) {
-        res.send(err);
-      }
-      res.json({ message: "Well done, description updated !" });
-    });
   });
 });
 
