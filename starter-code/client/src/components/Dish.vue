@@ -1,7 +1,7 @@
 <template>
   <div >
 
-    <div v-if="dish">
+    <div v-if="dish && allIngredients">
       <h1> {{ dish.name }} </h1>
       <p><img :src="dish.image" alt="pic cannot display" :style="stylesImg"></p>
       <h4>Description :</h4>
@@ -21,11 +21,18 @@
     <div v-else >
       <h1>loading</h1>
     </div>
+
+    <div>
+      <tag-ingredients :ingredients="allIngredients"> </tag-ingredients>
+    </div>
+
   </div>
 </template>
 
 <script>
 import axios from "axios";
+import Ingredients from "@/components/Ingredients";
+
 export default {
   data() {
     return {
@@ -33,7 +40,8 @@ export default {
       stylesImg: { height: "300px" },
       message: "",
       edit: false,
-      newDesc: null
+      newDesc: null,
+      allIngredients: null
     };
   },
   created() {
@@ -69,6 +77,9 @@ export default {
           return response.data;
         });
     }
+  },
+  components: {
+    tagIngredients: Ingredients
   }
 };
 </script>
