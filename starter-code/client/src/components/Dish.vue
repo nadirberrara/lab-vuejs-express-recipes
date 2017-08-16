@@ -1,19 +1,26 @@
 <template>
-  <div>
+  <div >
 
-    <p v-if="dish">
+    <div v-if="dish">
       <h1> {{ dish.name }} </h1>
       <p><img :src="dish.image" alt="pic cannot display" :style="stylesImg"></p>
       <h4>Description :</h4>
-      <p>{{ dish.description }}</p>
 
-      <form class="" action="index.html" method="post">
-        <input type="text" name="" value="" v-model="message">
-      </form>
-      <p> {{ message }} </p>
+      <div v-if="!edit">
+        <p>{{ dish.description }}</p>
+        <button type="button" v-on:click="editDish()">Edit {{ dish.name }} description</button>
+      </div>
 
-      <button type="button" name="button">Edit {{ dish.name }} description</button>
-
+      <div v-else>
+        <form method="post">
+          <textarea rows="8" cols="80" v-model="dish.description"> </textarea>
+        </form>
+        <button v-on:click="submitDish()" > Submit </button>
+      </div>
+    </div>
+    <div v-else >
+      <h1>loading</h1>
+    </div>
   </div>
 </template>
 
@@ -22,9 +29,11 @@ import axios from "axios";
 export default {
   data() {
     return {
-      dish: null,
+      dish: {},
       stylesImg: { height: "300px" },
-      message: ""
+      message: "",
+      edit: false,
+      newDesc: null
     };
   },
   created() {
@@ -40,6 +49,14 @@ export default {
     getDish(this.$route.params.dishName).then(dish => {
       this.dish = dish;
     });
+  },
+  methods: {
+    editDish() {
+      this.edit = true;
+    },
+    submitDish() {
+      this.edit = false;
+    }
   }
 };
 </script>
