@@ -19,12 +19,6 @@ router.get("/api/dishes", (req, res, next) => {
   });
 });
 
-router.get("/api/ingredients", (req, res, next) => {
-  Ingredient.find().then(ingredients => {
-    res.json(ingredients);
-  });
-});
-
 router.get("/api/dishes/:id", (req, res, next) => {
   Dish.findById(req.params.id, function(err, dish) {
     if (err) res.json("dish not find");
@@ -46,6 +40,12 @@ router.put("/api/dishes/:id", (req, res, next) => {
         }
       });
     }
+  });
+});
+
+router.get("/api/ingredients", (req, res, next) => {
+  Ingredient.find().then(ingredients => {
+    res.json(ingredients);
   });
 });
 
