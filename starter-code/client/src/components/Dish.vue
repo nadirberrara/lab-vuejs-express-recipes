@@ -37,12 +37,12 @@ export default {
     };
   },
   created() {
-    const myDishes = axios.create({
-      baseURL: "http://localhost:3000/api/dishes"
+    const myAPI = axios.create({
+      baseURL: "http://localhost:3000/api/"
     });
 
     function getDish(dishName) {
-      return myDishes.get("/" + dishName).then(response => {
+      return myAPI.get("/dishes/" + dishName).then(response => {
         return response.data;
       });
     }
@@ -56,6 +56,18 @@ export default {
     },
     submitDish() {
       this.edit = false;
+
+      const myAPI = axios.create({
+        baseURL: "http://localhost:3000/api/"
+      });
+
+      myAPI
+        .put("/dishes/" + this.dish._id, {
+          description: this.dish.description
+        })
+        .then(response => {
+          return response.data;
+        });
     }
   }
 };
