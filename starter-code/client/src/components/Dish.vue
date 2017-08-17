@@ -57,6 +57,15 @@ export default {
     getDish(this.$route.params.dishName).then(dish => {
       this.dish = dish;
     });
+
+    function getIngredients() {
+      return myAPI.get("/ingredients/").then(response => {
+        return response.data;
+      });
+    }
+    getIngredients().then(ingredients => {
+      this.ingredients = ingredients;
+    });
   },
   methods: {
     editDish() {

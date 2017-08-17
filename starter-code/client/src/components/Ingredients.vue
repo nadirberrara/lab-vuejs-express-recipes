@@ -1,6 +1,11 @@
 <template>
   <div>
-    This is ingredients template
+    <h3>Choose the amount of each ingredient you need :</h3>
+    <p v-for="ingredient in ingredients">
+        {{ ingredient.name }}
+        <input type="number" name="" value="">
+        <button type="submit" name="button">Ok</button>
+      </p>
   </div>
 </template>
 
@@ -8,13 +13,6 @@
 import axios from "axios";
 
 export default {
-  // name: "ingredients",
-  props: ["ingredients"],
-  // data() {
-  //   return {
-  //     message: "Toto"
-  //   };
-  // },
-  created() {}
+  props: ["ingredients"]
 };
 </script>
